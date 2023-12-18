@@ -9,6 +9,7 @@ export class Iframe {
     private iframe: HTMLIFrameElement
     private container: HTMLDivElement
     private moveEle: HTMLDivElement
+    xElem: any;
     private src = '';
 
     style = {
@@ -60,10 +61,8 @@ export class Iframe {
         this.container.append(this.iframe);
         this.container.append(this.moveEle);
         document.body.append(this.container);
-        setTimeout(() => {
-            const xElem = subjx("#" + this.container.id);
-            xElem.drag({}, {});
-        },1000)
+        this.xElem = subjx("#" + this.container.id);
+        this.xElem.drag({}, {});
     }
 
     update() {
@@ -113,6 +112,7 @@ export class Iframe {
             }
             this.container.style.setProperty('--check-container-width-add', `${this.addWidth}px`)
             this.container.style.setProperty('--check-container-height-add', `${this.addHeight}px`)
+            this.xElem.disable();
         });
     }
 
